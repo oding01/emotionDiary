@@ -1,5 +1,5 @@
 import './App.css';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import { useReducer, useCallback, useRef, createContext } from 'react';
 import New from './pages/New';
 import Diary from './pages/Diary';
@@ -66,13 +66,15 @@ function App() {
     <>
       <DiaryStateContext.Provider value={data}>
         <DiaryDispatchContext.Provider value={{ onCreate, onUpdate, onDelete }}>
-          <Routes>
-            <Route path="/" element={<Home />}></Route>
-            <Route path="/new" element={<New />}></Route>
-            <Route path="/diary" element={<Diary />}></Route>
-            <Route path="/edit" element={<Edit />}></Route>
-            <Route path="*" element={<NotFound />}></Route>
-          </Routes>
+          <BrowserRouter basename="/emotionDiary">
+            <Routes>
+              <Route path="/" element={<Home />}></Route>
+              <Route path="/new" element={<New />}></Route>
+              <Route path="/diary" element={<Diary />}></Route>
+              <Route path="/edit" element={<Edit />}></Route>
+              <Route path="*" element={<NotFound />}></Route>
+            </Routes>
+          </BrowserRouter>
         </DiaryDispatchContext.Provider>
       </DiaryStateContext.Provider>
     </>
